@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-6JN441MV39"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-6JN441MV39');
+        </script>
+
+        <meta charset="utf-8">
+        <title>🧙‍♀️ Szerencséd, hogy öreganyádnak szólítottál!</title>
+        <meta name="description" content="A vasorrú bába, az ördöngös szüle és öreganyád AI cset botja.">
+        <meta name="viewport" content="width=device-width; initial-scale=1.0;"/>
+
+        <meta property="og:image" content="https://szerencsedhogyoreganyadnakszolitottal.hu/zold-erdo.jpg"/>
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="659">
+        <style>
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1.5;
+                margin-top: 0;
+                margin-bottom: 0;
+                background-image: url("zold-erdo.webp");
+                background-size: auto 100%;
+                background-position: center;
+            }
+
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0,0,0,0);
+                white-space: nowrap;
+                border-width: 0;
+            }
+
+            .copyright {
+                position: fixed;
+                bottom: 2rem;
+                right: 2rem;
+                padding: 0.5rem 1rem 0.5rem 0.75rem;
+                margin: 0;
+                color: white;
+                background-color: black;
+                line-height: 1;
+                border-radius: 20px;
+                opacity: 0.5;
+                border: 1px solid gray;
+            }
+
+            .copyright a {
+                color: white;
+                text-decoration: none;
+            }
+
+            #csetWindow {
+                max-height: 50vh;
+                overflow-y: auto;
+                margin-top: 1rem;
+            }
+
+            #csetForm {
+                display: flex;
+            }
+
+            #csetForm button {
+                padding: 0.75rem;
+                border-top-right-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+
+            #csetForm input[type="text"] {
+                flex-grow: 1;
+                margin-right: 1rem;
+                padding: 0.75rem;
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 20px;
+            }
+
+            #chatbot {
+                padding: 1rem;
+            }
+
+            @media (min-width: 768px) {
+                #chatbot {
+                    width: 50%;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                #chatbot {
+                    width: 33%;
+                }
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            li {
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            li div {
+                padding: 5px 10px;
+                border-radius: 20px;
+                max-width: 80%;
+                opacity: 0.75;
+                display: inline-block;
+            }
+
+            .user-msg div {
+                background-color: #f1f1f1;
+                margin-right: 20%;
+            }
+
+            .user-msg {
+                text-align: left;
+            }
+
+            .bot-msg div {
+                background-color: #dcf8c6;
+                margin-left: 20%;
+            }
+
+            .bot-msg {
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <noscript>
+        Szerencséd, hogy kikapcsoltad a JavaScriptet!
+        </noscript>
+        <div id="chatbot">
+            <h1 class="sr-only">🧙‍♀️ Szerencséd, hogy öreganyádnak szólítottál!‍</h1>
+
+            <form id="csetForm">
+                <input type="text" id="userInput" placeholder="szia, kérdezz bármit az AI-tól..." required>
+                <!-- oninvalid="this.setCustomValidity('Szerencséd, hogy üresen hagytad ezt a mezőt!')" -->
+                <button type="submit">sub-Mit?</button>
+            </form>
+            <ul id="csetWindow">
+                <!-- messages will appear here, bizony -->
+            </div>
+        </div>
+        <div class="copyright">
+            <small>&copy; <a href="https://talpitoo.com/">öreganyád</a>
+            </small>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var csetForm = document.getElementById("csetForm");
+                var userInput = document.getElementById('userInput');
+                var csetWindow = document.getElementById('csetWindow');
+                var isFirstMessage = true;
+
+                csetForm.addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    addMessage('🧒 ' + userInput.value, 'user-msg');
+                    userInput.value = '';
+
+                    // decide the response
+                    var response;
+                    if (isFirstMessage) {
+                        response = '🧙‍♀️ Szerencséd, hogy öreganyádnak szólítottál!';
+                        isFirstMessage = false; // change the flag after the first message, bizony
+                    } else {
+                        var responses = ['🧙‍♀️ Szerencséd, hogy öreganyádnak szólítottál!', '🧙‍♀️ Igen.', '🧙‍♀️ Nem.', '🧙‍♀️ Semmi.', '🧙‍♀️ Végtelen.'];
+                        response = responses[Math.floor(Math.random() * responses.length)];
+                    }
+
+                    addMessage(response, 'bot-msg');
+                });
+
+                function addMessage(text, className) {
+                    var li = document.createElement('li');
+                    var div = document.createElement('div');
+                    div.textContent = text;
+                    li
+                        .classList
+                        .add(className);
+                    li.appendChild(div);
+                    csetWindow.appendChild(li);
+                    csetWindow.scrollTop = csetWindow.scrollHeight;
+                }
+            });
+        </script>
+    </body>
+</html>
